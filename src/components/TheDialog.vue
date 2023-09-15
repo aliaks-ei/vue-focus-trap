@@ -1,5 +1,5 @@
 <template>
-  <Transition name="fade">
+  <Transition :duration="300">
     <div 
       v-show="props.modelValue" 
       v-focus-trap="props.modelValue" 
@@ -7,7 +7,7 @@
       class="dialog" 
       @keydown.esc="closeDialog"
     >
-      <div class="dialog__overlay" tabindex="-1" @click.self="closeDialog">
+      <div class="dialog__backdrop" tabindex="-1" @click.self="closeDialog">
         <div class="dialog__container" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
           <!-- Header -->
           <header class="dialog__header">
@@ -69,7 +69,7 @@ const closeDialog = () => {
 
   box-sizing: border-box;
 }
-.dialog__overlay {
+.dialog__backdrop {
   position: fixed;
   top: 0;
   right: 0;
@@ -144,13 +144,27 @@ const closeDialog = () => {
   color: #ffffff;
 }
 
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
+.v-enter-active .dialog__backdrop,
+.v-leave-active .dialog__backdrop {
+  transition: opacity 300ms ease-in-out;
 }
 
-.v-enter-from,
-.v-leave-to {
+.v-enter-active .dialog__container {
+  transition: transform 200ms 100ms ease-out, opacity 300ms ease-in-out;
+}
+
+.v-leave-active .dialog__container {
+  transition: transform 300ms ease-out, opacity 300ms ease-in-out;
+}
+
+.v-enter-from .dialog__backdrop,
+.v-leave-to .dialog__backdrop {
+  opacity: 0;
+}
+
+.v-enter-from .dialog__container,
+.v-leave-to .dialog__container {
+  transform: translateY(50px);
   opacity: 0;
 }
 </style>

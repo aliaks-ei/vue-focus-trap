@@ -32,9 +32,9 @@ const getTabbableNodes = (el: HTMLElement): HTMLElement[] => {
 
 // Tries to set focus to the first tabbable node inside the element
 const setFocusToFirstNode = (el: HTMLElement) => {
-  const tabbableNodes = getTabbableNodes(el);
+  const [firstTabbableNode] = getTabbableNodes(el);
 
-  tabbableNodes[0]?.focus();
+  firstTabbableNode?.focus();
 };
 
 const retainFocus = (el: HTMLElement, event: KeyboardEvent) => {
@@ -44,18 +44,15 @@ const retainFocus = (el: HTMLElement, event: KeyboardEvent) => {
   if (!tabbableNodes.length) return;
 
   // Filters nodes which are hidden to prevent focus leak outside the modal
-  tabbableNodes = tabbableNodes.filter((node) => {
-    return node.offsetParent !== null;
-  });
+  tabbableNodes = tabbableNodes.filter((node) => node.offsetParent !== null);
 
+  // If element does not contain the currently focused element, focus the first tabbable node
   if (!el.contains(document.activeElement)) {
     tabbableNodes[0]?.focus();
     return;
   }
 
-  const focusedItemIndex = tabbableNodes.indexOf(
-    document.activeElement as HTMLElement,
-  );
+  const focusedItemIndex = tabbableNodes.indexOf(document.activeElement as HTMLElement);
 
   /**
    * If the Shift key is being pressed while tabbing (moving backwards)
@@ -88,10 +85,7 @@ const handleKeyDownEvent = (el: HTMLElement, event: KeyboardEvent) => {
 };
 
 // Adds a keydown listener to document and stores it on the element
-const addKeyDownListener = (
-  el: ExtendedHTMLElement,
-  listener: EventListener,
-) => {
+const addKeyDownListener = (el: ExtendedHTMLElement, listener: EventListener) => {
   document.addEventListener("keydown", listener);
   el._keydownListener = listener;
 };
