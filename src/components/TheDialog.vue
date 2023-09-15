@@ -65,7 +65,7 @@ const closeDialog = () => {
 
 <style scoped>
 .dialog {
-  --color-primary: #1976d2;
+  --color-primary: rgb(25 118 210);
 
   box-sizing: border-box;
 }
@@ -115,6 +115,11 @@ const closeDialog = () => {
 .dialog__button {
   cursor: pointer;
   border: none;
+  box-sizing: border-box;
+}
+
+.dialog__button:active {
+  transform: scale(0.96);
 }
 
 .dialog__button--close {
@@ -132,6 +137,7 @@ const closeDialog = () => {
   font-size: .875rem;
   padding: 8px 16px;
   border-radius: 4px;
+  border: 1px solid transparent;
 }
 
 .dialog__button--blank {
@@ -139,9 +145,17 @@ const closeDialog = () => {
   color: var(--color-primary);
 }
 
+.dialog__button--blank:hover {
+  border-color: var(--color-primary);
+}
+
 .dialog__button--default {
   background-color: var(--color-primary);
   color: #ffffff;
+}
+
+.dialog__button--default:hover {
+  background-color: rgb(9 89 168);
 }
 
 .v-enter-active .dialog__backdrop,
