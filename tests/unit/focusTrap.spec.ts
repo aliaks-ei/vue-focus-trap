@@ -1,6 +1,6 @@
 import { defineComponent } from "vue";
 import { mount } from "@vue/test-utils";
-import { expect, test, vi, beforeEach } from "vitest";
+import { expect, test, vi } from "vitest";
 
 import focusTrap, { type ExtendedHTMLElement } from "@/focusTrap";
 
