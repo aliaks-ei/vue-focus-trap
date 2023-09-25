@@ -1,0 +1,74 @@
+:root {
+  --color-primary: #512da8;
+  --color-primary-hover: #311b92;
+}
+
+:root { 
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* Backdrop */
+.backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(0 0 0 / 70%);
+}
+
+.v-enter-active .backdrop,
+.v-leave-active .backdrop {
+  transition: opacity 300ms ease-in-out;
+}
+
+.v-enter-from .backdrop,
+.v-leave-to .backdrop {
+  opacity: 0;
+}
+
+/* Buttons */
+.button {
+  font-size: .875rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button--default {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.button--default:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.button--blank {
+  background-color: transparent;
+  color: var(--color-primary);
+}
+
+.button--blank:hover {
+  border-color: var(--color-primary-hover);
+}
